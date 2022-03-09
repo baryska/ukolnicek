@@ -6,7 +6,8 @@ const totalTasks = document.querySelector("#total");
 console.log(totalTasks);
 let newTaskText = "";
 let completedTasksNumber = 0;
-let totalTasksNumber = 0;
+let totalTasksNumber = localStorage.getItem("tasksNumber") || 0;
+totalTasks.innerHTML = totalTasksNumber;
 
 const changeTaskStatus = (event) => {
   // event.target.classList.toggle("done");
@@ -14,10 +15,12 @@ const changeTaskStatus = (event) => {
     event.target.classList.remove("done");
     completedTasksNumber--;
     totalTasksNumber--;
+    localStorage.setItem("tasksNumber", totalTasksNumber);
   } else {
     event.target.classList.add("done");
     completedTasksNumber++;
     totalTasksNumber++;
+    localStorage.setItem("tasksNumber", totalTasksNumber);
   }
   completedTasks.innerHTML = completedTasksNumber;
   totalTasks.innerHTML = totalTasksNumber;
